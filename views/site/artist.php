@@ -8,7 +8,7 @@ use yii\helpers\Html;
         <div><strong>Исполнитель: </strong><?= $artist->name; ?> <span style="color: grey;font-size: 12px;">(жанр:
             <?php foreach ( $artist->genres as $ind => $genre ) {
                 if($ind > 0) echo ', ';
-                echo $genre->name;
+                echo $genre['name'];
             }
             ?>)</span></div>
         <br>

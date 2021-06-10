@@ -20,7 +20,6 @@ class m210606_184421_create_tables extends Migration
         $this->createTable('artists', [
             'id' => $this->primaryKey(),
             'name' => $this->string(50)->notNull(),
-            'genre_id' => $this->string(50),
         ]);
 
         $this->createTable('albums', [
@@ -37,6 +36,12 @@ class m210606_184421_create_tables extends Migration
             'duration' => $this->string(20),
             'file' => $this->string(50),
         ]);
+
+        $this->createTable('artist_genre', [
+            'artist_id' => $this->integer(4),
+            'genre_id' => $this->integer(4),
+            "PRIMARY KEY (`artist_id`,`genre_id`)",
+        ]);
     }
 
     /**
@@ -51,6 +56,8 @@ class m210606_184421_create_tables extends Migration
         $this->dropTable('albums');
 
         $this->dropTable('tracks');
+
+        $this->dropTable('artist_genre');
     }
 
     /*

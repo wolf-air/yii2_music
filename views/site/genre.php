@@ -11,7 +11,7 @@
         <br>
         <ul style="list-style: none;padding: 0;">
             <?php foreach ( $genre->artists as $artist ) {
-                echo "<li>" . Html::a($artist->name, ['site/artist', 'id' => $artist->id]) . "</li>";
+                echo "<li>" . Html::a($artist['name'], ['site/artist', 'id' => $artist['id']]) . "</li>";
             }
             ?>
         </ul>

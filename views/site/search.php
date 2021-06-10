@@ -8,7 +8,7 @@ use yii\helpers\Html;
 <br>
 <ul style="list-style: none;padding: 0;">
     <?php foreach ( $artists as $artist ) {
-        echo "<li>" . Html::a($artist['name'], ['site/artist', 'id' => $artist['id']]) . "<span style=\"color: grey;font-size: 12px;\">(жанр: ${artist['genre']})</span></li>";
+        echo "<li>" . Html::a($artist['name'], ['site/artist', 'id' => $artist['id']]) . "<span style=\"color: grey;font-size: 12px;\">(жанр: " . implode(', ', $genres[$artist['id']]) . ")</span></li>";
     }
     ?>
 </ul>

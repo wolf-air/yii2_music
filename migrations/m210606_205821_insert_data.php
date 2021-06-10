@@ -43,7 +43,6 @@ class m210606_205821_insert_data extends Migration
 
         $this->insert('artists', [
             'name' => 'Five Finger Death Punch',
-            'genre_id' => 3,
         ]);
 
         $this->insert('albums', [
@@ -116,7 +115,6 @@ class m210606_205821_insert_data extends Migration
 
         $this->insert('artists', [
             'name' => 'Rammstein',
-            'genre_id' => 3,
         ]);
 
         $this->insert('albums', [
@@ -141,7 +139,6 @@ class m210606_205821_insert_data extends Migration
 
         $this->insert('artists', [
             'name' => 'Тина Тёрнер',
-            'genre_id' => 2,
         ]);
 
         $this->insert('albums', [
@@ -166,7 +163,6 @@ class m210606_205821_insert_data extends Migration
 
         $this->insert('artists', [
             'name' => 'Мадонна',
-            'genre_id' => 1,
         ]);
 
         $this->insert('albums', [
@@ -189,6 +185,30 @@ class m210606_205821_insert_data extends Migration
             'file' => 'mp3',
         ]);
 
+        $this->insert('artist_genre', [
+            'artist_id' => 1,
+            'genre_id' => 3,
+        ]);
+
+        $this->insert('artist_genre', [
+            'artist_id' => 2,
+            'genre_id' => 3,
+        ]);
+
+        $this->insert('artist_genre', [
+            'artist_id' => 3,
+            'genre_id' => 2,
+        ]);
+
+        $this->insert('artist_genre', [
+            'artist_id' => 4,
+            'genre_id' => 1,
+        ]);
+
+        $this->insert('artist_genre', [
+            'artist_id' => 4,
+            'genre_id' => 2,
+        ]);
     }
 
     public function down()
@@ -200,6 +220,8 @@ class m210606_205821_insert_data extends Migration
         $this->truncateTable('albums');
 
         $this->truncateTable('tracks');
+
+        $this->truncateTable('artist_genre');
     }
 
 }

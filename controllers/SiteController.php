@@ -124,20 +124,25 @@ class SiteController extends Controller
             'albums.year AS year',
             'tracks.name AS track_name',
         ])->from('artists')
-            ->innerJoin('genres', 'artists.genre_id = genres.id')
+            ->innerJoin('artist_genre', 'artists.id = artist_genre.artist_id')
+            ->innerJoin('genres', 'artist_genre.genre_id = genres.id')
             ->innerJoin('albums', 'artists.id = albums.artist_id')
             ->innerJoin('tracks', 'albums.id = tracks.album_id')
             ->where(['or', ['like', 'artists.name', ':search', [':search' => $search]], ['like', 'albums.name',':search', [':search' => $search]], ['like', 'tracks.name', ':search', [':search' => $search]]])
         ->all();
 
         $artists = [];
+        $genres = [];
         $albums = [];
         $tracks = [];
         foreach ($result as $item) {
-            $artist = array('id' => $item['artist_id'], 'name' => $item['artist_name'], 'genre' => $item['genre_name']);
+            $artist = array('id' => $item['artist_id'], 'name' => $item['artist_name']);
 
             if(!in_array($artist, $artists)) {
                 $artists[] = $artist;
+                $genres[$item['artist_id']][] = $item['genre_name'];
+            } else if(in_array($artist, $artists) && !in_array($item['genre_name'], $genres[$item['artist_id']])) {
+                array_push($genres[$item['artist_id']], $item['genre_name']);
             }
 
             $album = array('id' => $item['album_id'], 'name' => $item['album_name'], 'artist_name' => $item['artist_name'], 'year' => $item['year']);
@@ -154,7 +159,7 @@ class SiteController extends Controller
         }
 
 
-        return $this->renderAjax('search', compact('artists', 'albums', 'tracks'));
+        return $this->renderAjax('search', compact('artists', 'genres', 'albums', 'tracks'));
     }
 
     /**
